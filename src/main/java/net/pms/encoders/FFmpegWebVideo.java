@@ -426,11 +426,11 @@ class PatternMap<T> extends modAwareHashMap<String, T> {
 	}
 
 	void compile() {
-		String joined = "";
+		StringBuilder joined = new StringBuilder();
 		groupmap.clear();
 		for (String regex : this.keySet()) {
 			// add each regex as a capture group
-			joined += "|(" + regex + ")";
+			joined.append("|(").append(regex).append(")");
 			// map all subgroups to the parent
 			for (int i = 0; i < Pattern.compile(regex).matcher("").groupCount() + 1; i++) {
 				groupmap.add(regex);
